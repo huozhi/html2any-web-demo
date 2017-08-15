@@ -1,0 +1,84 @@
+button:hover {
+  cursor: pointer;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  display: flex;
+}
+
+.editor-wrap {
+  position: relative;
+  flex: 1 0 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em;
+}
+
+.editor {
+  flex: 1;
+  align-self: stretch;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  min-height: 500px;
+}
+
+.CodeMirror {
+  height: auto;
+}
+
+.render-trigger {
+  margin: 2em auto 1em;
+  padding: 18px 48px;
+  background-color: #eee;
+  color: #282828;
+  border: 0;
+  font-size: 1.2em;
+}
+
+.preview-trigger {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 8px 16px;
+  background-color: #eee;
+  color: #282828;
+  border: 0;
+  font-size: 16px;
+  z-index: 10;
+}
+
+.preview {
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+.demo {
+  flex: 1 0 50%;
+  margin-top: 36px;
+  margin: 1em;
+  padding: 0 10px;
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  min-height: 500px;
+}
+
+.vide-player {
+  margin: auto;
+}
+
+.ast {
+  margin: 40px auto;
+  padding: 50px 20px;
+  background-color: #ddd;
+  width: 80vw;
+}
