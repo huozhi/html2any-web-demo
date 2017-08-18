@@ -2,9 +2,10 @@
   "name": "html2any-web-demo",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://huozhi.github.io/html2any-web-demo",
   "dependencies": {
     "he": "^1.1.1",
-    "html2any": "file:../html2any",
+    "html2any": "^0.0.2",
     "react": "^15.6.1",
     "react-codemirror": "^1.0.0",
     "react-dom": "^15.6.1",
@@ -15,7 +16,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "deploy": "npm run build && gh-pages -d build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "gh-pages": "^1.0.0"
   }
 }

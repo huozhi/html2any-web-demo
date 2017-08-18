@@ -54,7 +54,7 @@ function rule(node, children) {
     if (src.endsWith('gif')) {
       return <GifPlayer gif={src} still={coverPNG} />
     } else {
-      return <img {...attributes} />
+      return <img {...attributes} alt='img' />
     }
   } else if (name === 'br') {
     // replace br with hr
@@ -65,8 +65,6 @@ function rule(node, children) {
     const Tag = name
     return <Tag {...attributes}>{children}</Tag>
   }
-
-  return null
 }
 
 export default rule
