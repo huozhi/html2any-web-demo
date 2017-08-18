@@ -1,6 +1,8 @@
 import React from 'react'
 import he from 'he'
+import VideoPlayer from 'react-player'
 import GifPlayer from 'react-gif-player'
+import coverPNG from '../images/flip_the_frog.jpg'
 
 const textTag = [
   'a', 'h1', 'p', 'b', 'span', 'strong', 'em',
@@ -50,13 +52,15 @@ function rule(node, children) {
   } else if (name === 'img') {
     const {src} = attributes
     if (src.endsWith('gif')) {
-      return <GifPlayer gif={src} still={src.replace(/gif$/, 'jpg')} />
+      return <GifPlayer gif={src} still={coverPNG} />
     } else {
       return <img {...attributes} />
     }
   } else if (name === 'br') {
     // replace br with hr
     return <hr className='customized-hr' />
+  } else if (name === 'video') {
+    return <VideoPlayer url={attributes.src} playing loop />
   } else {
     const Tag = name
     return <Tag {...attributes}>{children}</Tag>

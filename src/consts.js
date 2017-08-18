@@ -13,5 +13,7 @@ export const defaultHTML = `
     <li style="clear: both;"><img style="float: left;" src="https://html-online.com/img/05-gibberish.png" alt="gibberish" width="45" /> Lorem-Ipsum generator</li>
     <li style="clear: both;"><img style="float: left;" src="https://html-online.com/img/6-table-div-html.png" alt="html table div" width="45" /> Table to DIV conversion</li>
   </ol>
+  <img src="https://media.giphy.com/media/b9aScKLxdv0Y0/giphy.gif">
+  <video autoplay poster="https://i.kinja-img.com/gawker-media/image/upload/s--YlhqEJnr--/c_scale,fl_progressive,q_80,w_800/y0v2src9glf2p7o6ja6g.jpg" src="https://www.youtube.com/watch?v=ysz5S6PUM-U"></video>
 </div>
 `
