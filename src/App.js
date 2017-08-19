@@ -28,12 +28,20 @@ class App extends Component {
   handleUpdateComponent = () => {
     const {html} = this.state
     this.setState({
-      ast: html2any(html)
+      ast: html2any(html),
+      showPreview: false,
     })
   }
 
   handlePreview = () => {
-    this.setState({showPreview: !this.state.showPreview})
+    this.setState({
+      showPreview: !this.state.showPreview,
+      ast: null,
+    })
+  }
+
+  get astText() {
+    return JSON.stringify(this.state.ast, null, 2)
   }
 
   render() {
@@ -41,31 +49,47 @@ class App extends Component {
 
     return (
       <div className='App'>
-        <button className='render-trigger' onClick={this.handleUpdateComponent}>
-          render
-        </button>
+        <div className='ops'>
+          <button className='trigger' onClick={this.handleUpdateComponent}>
+            render
+          </button>
+          <button onClick={this.handlePreview} className='trigger'>
+            {showPreview ? 'show editor' : 'preview'}
+          </button>
+          <p>Click <b>render</b> if you wanna test transform result, click <b>preview</b> if you just wanna view origin html</p>
+          <h3>transform rules we defined:</h3>
+          <ul>
+            <li>transform br to hr;</li>
+            <li>transform gif to GifPlayer;</li>
+            <li>transform video to VideoPlayer;</li>
+          </ul>
+        </div>
         <div className='main'>
           <div className='editor-wrap'>
-            {showPreview
-              ? <div className='preview' dangerouslySetInnerHTML={{__html: html}} />
-              : (
-                <CodeMirror
-                  className='editor'
-                  value={html}
-                  onChange={this.handleChangeHtml}
-                  options={this.codeMirrorOps}
-                />
-              )
+            {!showPreview && !ast &&
+              <CodeMirror
+                className='editor'
+                value={html}
+                onChange={this.handleChangeHtml}
+                options={this.codeMirrorOps}
+              />
             }
-            <button onClick={this.handlePreview} className='preview-trigger'>preview</button>
+            {showPreview &&
+              <div className='preview' dangerouslySetInnerHTML={{__html: html}} />
+            }
+            {ast &&
+              <div className='preview'>
+                {transform(ast, rule)}
+              </div>
+            }
           </div>
-          <div className='demo'>
-            {transform(ast, rule)}
-          </div>
+
         </div>
-        <pre className='ast'>
-          {JSON.stringify(ast, null, 2)}
-        </pre>
+        {ast &&
+          <pre className='ast'>
+            {this.astText}
+          </pre>
+        }
       </div>
     );
   }

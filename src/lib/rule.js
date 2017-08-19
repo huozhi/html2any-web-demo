@@ -22,7 +22,7 @@ function rule(node, children) {
     // NOTICE: this way to handle string node is incorrect
     // RN does not have any method to inherit styles
     // so nested Text tags should be rendered as sibling Text nodes in a View better
-    return node
+    return he.decode(node)
   }
   const {name, attributes} = node
   // convert string style
@@ -60,7 +60,7 @@ function rule(node, children) {
     // replace br with hr
     return <hr className='customized-hr' />
   } else if (name === 'video') {
-    return <VideoPlayer url={attributes.src} playing loop />
+    return <VideoPlayer className='vide-player' url={attributes.src} playing loop />
   } else {
     const Tag = name
     return <Tag {...attributes}>{children}</Tag>
