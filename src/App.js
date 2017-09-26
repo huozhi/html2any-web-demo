@@ -25,14 +25,6 @@ class App extends Component {
     this.setState({html})
   }
 
-  handleUpdateComponent = () => {
-    const {html} = this.state
-    this.setState({
-      ast: html2any(html),
-      showPreview: false,
-    })
-  }
-
   handlePreview = () => {
     this.setState({
       showPreview: !this.state.showPreview,
@@ -40,33 +32,27 @@ class App extends Component {
     })
   }
 
-  get astText() {
-    return JSON.stringify(this.state.ast, null, 2)
-  }
-
   render() {
-    const {html, ast, showPreview} = this.state
+    const {html, showPreview} = this.state
+
+    const ast = html2any(html)
 
     return (
       <div className='App'>
         <div className='ops'>
-          <button className='trigger' onClick={this.handleUpdateComponent}>
-            render
-          </button>
-          <button onClick={this.handlePreview} className='trigger'>
-            {showPreview ? 'show editor' : 'preview'}
-          </button>
-          <p>Click <b>render</b> if you wanna test transform result, click <b>preview</b> if you just wanna view origin html</p>
-          <h3>transform rules we defined:</h3>
-          <ul>
-            <li>transform br to hr;</li>
-            <li>transform gif to GifPlayer;</li>
-            <li>transform video to VideoPlayer;</li>
-          </ul>
+          <p>Click <b>preview</b> if you just wanna view origin html</p>
+          <div>
+            <span style={{display: 'inline-block', width: '50%', textAlign: 'center'}}>origin html/editor</span>
+            <span style={{display: 'inline-block', width: '50%', textAlign: 'center'}}>transformed html</span>
+          </div>
         </div>
         <div className='main'>
           <div className='editor-wrap'>
-            {!showPreview && !ast &&
+            <button onClick={this.handlePreview} className='trigger'>
+              {showPreview ? 'show editor' : 'preview'}
+            </button>
+            {showPreview ?
+              <div className='preview' dangerouslySetInnerHTML={{__html: html}} /> :
               <CodeMirror
                 className='editor'
                 value={html}
@@ -74,21 +60,19 @@ class App extends Component {
                 options={this.codeMirrorOps}
               />
             }
-            {showPreview &&
-              <div className='preview' dangerouslySetInnerHTML={{__html: html}} />
-            }
-            {ast &&
-              <div className='preview'>
-                {transform(ast, rule)}
-              </div>
-            }
+            <div className='transform'>
+              {transform(ast, rule)}
+            </div>
           </div>
 
         </div>
         {ast &&
-          <pre className='ast'>
-            {this.astText}
-          </pre>
+          <div style={{margin: 'auto', marginTop: 20}}>
+            <div>AST:</div>
+            <pre className='ast'>
+              {JSON.stringify(ast, null, 2)}
+            </pre>
+          </div>
         }
       </div>
     );

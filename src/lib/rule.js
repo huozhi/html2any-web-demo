@@ -5,7 +5,7 @@ import GifPlayer from 'react-gif-player'
 import coverPNG from '../images/flip_the_frog.jpg'
 
 const textTag = [
-  'a', 'h1', 'p', 'b', 'span', 'strong', 'em',
+  'a', 'p', 'b', 'span', 'strong', 'em',
 ]
 
 const capitalize = str => str.charAt(0).toUpperCase() + str.toLowerCase().slice(1)
@@ -24,7 +24,7 @@ function rule(node, children) {
     // so nested Text tags should be rendered as sibling Text nodes in a View better
     return he.decode(node)
   }
-  const {name, attributes} = node
+  const {name, attributes, index} = node
   // convert string style
   if (typeof attributes.style === 'string') {
     const styles = attributes.style.split(';')
@@ -33,28 +33,41 @@ function rule(node, children) {
       .map(s => s.split(':'))
       .reduce((r, c) => {
         const [k, v] = c
-        // if (!v) {
-        //   console.log(c, k, v)
-        // }
         r[camelCase(k.trim())] = v ? v.trim() : v
         return r
       }, {})
-    // console.log('styles', styles)
     attributes.style = styles
   }
   if (textTag.indexOf(name) >= 0) {
     const Tag = name
     const c = typeof children === 'string' ? he.decode(children) : children
     return <Tag {...attributes}>{c}</Tag>
-
   } else if (name === 'div') {
     return <div {...attributes}>{children}</div>
+  } else if (name === 'h1' || name === 'h2') {
+    return <p {...attributes} style={{color: "#444"}}>{children}</p>
+  } else if (name === 'button') {
+    console.log('button', node)
+    return (
+      <button style={{padding: '10px 20px', border: 0, backgroundColor: '#0f88eb', color: '#fff'}}>
+        {children}
+      </button>
+    )
   } else if (name === 'img') {
     const {src} = attributes
     if (src.endsWith('gif')) {
       return <GifPlayer gif={src} still={coverPNG} />
     } else {
-      return <img {...attributes} alt='img' />
+      return (
+        <img
+          {...attributes}
+          key={index}
+          alt='img'
+          width={200}
+          height={200}
+          style={{width: 200, height: 200, display: 'inline-block'}}
+        />
+      )
     }
   } else if (name === 'br') {
     // replace br with hr

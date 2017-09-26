@@ -14,9 +14,8 @@ button:hover {
 .main {
   margin: auto;
   display: flex;
-  flex-direction: column;
   padding: 0 1em;
-  width: 1100px;
+  width: 1200px;
   box-shadow: 0 0 10px 0 rgba(0,0,0,.3);
 }
 
@@ -24,17 +23,24 @@ button:hover {
   position: relative;
   flex: 1 0;
   display: flex;
-  flex-direction: column;
   align-items: stretch;
   padding: 1em 0;
   overflow: scroll;
 }
 
-.editor {
-  flex: 1;
-  align-self: stretch;
+.editor,
+.preview,
+.transform {
+  flex: 1 0 50%;
   border: 1px solid #ddd;
   border-radius: 3px;
+}
+
+.preview,
+.editor {
+  margin-right: 10px;
+  align-self: stretch;
+  overflow: scroll;
   min-height: 500px;
 }
 
@@ -44,10 +50,14 @@ button:hover {
 
 .ops {
   margin: auto;
+  width: 1200px;
 }
 
 .trigger {
-  margin: 1em .5em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
   padding: 8px 16px;
   background-color: #42a8ff;
   border-radius: 32px;
@@ -58,9 +68,8 @@ button:hover {
   font-size: 1.2em;
 }
 
-.preview {
-  border: 1px solid #ddd;
-  border-radius: 3px;
+.trigger:hover {
+  background-color: #1675c5;
 }
 
 .vide-player {
@@ -68,9 +77,8 @@ button:hover {
 }
 
 .ast {
-  margin: 40px auto;
   padding: 50px 20px;
-  background-color: #ddd;
+  background-color: #eee;
   width: 80vw;
 }
 
