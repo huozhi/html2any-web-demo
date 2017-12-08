@@ -10,7 +10,7 @@ export const defaultHTML = `
     <img style="float: left;" src="https://html-online.com/img/03-docs-to-html.png" alt="Word to html" width="45" />
     <img style="float: left;" src="https://html-online.com/img/04-replace.png" alt="replace text" width="45" />
   </div>
-  <img src="///media.giphy.com/media/b9aScKLxdv0Y0/giphy.gif" width="320" height="240">
+  <img src="//media.giphy.com/media/b9aScKLxdv0Y0/giphy.gif" width="320" height="240">
 
   <p>if you see only&nbsp;<strong>poster</strong>&nbsp;here, it means the video is still loading</p>
   <video
