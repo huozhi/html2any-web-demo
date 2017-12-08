@@ -25,6 +25,10 @@ function rule(node, children) {
     return he.decode(node)
   }
   const {name, attributes, index} = node
+  if (attributes && attributes.class) {
+    attributes.className = attributes.class
+    delete attributes.class
+  }
   // convert string style
   if (typeof attributes.style === 'string') {
     const styles = attributes.style.split(';')
@@ -47,7 +51,6 @@ function rule(node, children) {
   } else if (name === 'h1' || name === 'h2') {
     return <p {...attributes} style={{color: "#444"}}>{children}</p>
   } else if (name === 'button') {
-    console.log('button', node)
     return (
       <button style={{padding: '10px 20px', border: 0, backgroundColor: '#0f88eb', color: '#fff'}}>
         {children}
@@ -63,9 +66,9 @@ function rule(node, children) {
           {...attributes}
           key={index}
           alt='img'
-          width={200}
-          height={200}
-          style={{width: 200, height: 200, display: 'inline-block'}}
+          width={100}
+          height={100}
+          style={{width: 100, height: 100, display: 'inline-block'}}
         />
       )
     }

@@ -1,19 +1,16 @@
 import React, {Component} from 'react'
 import CodeMirror from 'react-codemirror'
-import {tokenizer, parser, transform} from 'html2any'
+import html2any, {tokenize, parse} from 'html2any'
 import rule from './lib/rule'
 import {defaultHTML} from './consts'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/htmlembedded/htmlembedded'
 import './App.css'
 
-const html2any = (html) => {
-  return parser(tokenizer(html))[0]
-}
-
 class App extends Component {
   state = {
     html: defaultHTML,
+    showPreview: true,
   }
 
   codeMirrorOps = {
@@ -28,23 +25,31 @@ class App extends Component {
   handlePreview = () => {
     this.setState({
       showPreview: !this.state.showPreview,
-      ast: null,
     })
   }
 
   render() {
     const {html, showPreview} = this.state
 
-    const ast = html2any(html)
+    const ast = parse(tokenize(html))[0]
 
     return (
       <div className='App'>
         <div className='ops'>
+          <h3>Rule:</h3>
+          <ul>
+            <li>string ===>  decode(string)</li>
+            <li>h1/h2 ====>  p > children</li>
+            <li>button ===>  blue button</li>
+            <li>gif ======>  gif player</li>
+            <li>video ====>  video stream player</li>
+          </ul>
           <p>Click <b>preview</b> if you just wanna view origin html</p>
           <div>
             <span style={{display: 'inline-block', width: '50%', textAlign: 'center'}}>origin html/editor</span>
             <span style={{display: 'inline-block', width: '50%', textAlign: 'center'}}>transformed html</span>
           </div>
+
         </div>
         <div className='main'>
           <div className='editor-wrap'>
@@ -60,9 +65,12 @@ class App extends Component {
                 options={this.codeMirrorOps}
               />
             }
-            <div className='transform'>
-              {transform(ast, rule)}
-            </div>
+
+            {html &&
+              <div className='preview html2any-preview'>
+                {html2any(html, rule)}
+              </div>
+            }
           </div>
 
         </div>

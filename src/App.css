@@ -106,3 +106,10 @@ button:hover {
   padding: 4px;
   border: 2px dashed #fff;
 }
+
+.origin video {
+  border: 1px dashed #444;
+  padding: 10px;
+  border-radius: 3px;
+  margin: auto;
+}
