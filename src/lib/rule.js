@@ -4,6 +4,37 @@ import VideoPlayer from 'react-player'
 import GifPlayer from 'react-gif-player'
 import coverPNG from '../images/flip_the_frog.jpg'
 
+const styles = {
+  convertButton: {
+    padding: '10px 20px',
+    margin: '0 10px',
+    border: 0,
+    backgroundColor: '#6f8292',
+    color: '#fff',
+  },
+  videoPlayer: {
+    maxWidth: '100%',
+    margin: 'auto',
+  },
+
+  videoPlayerWrap: {
+    position: 'relative',
+  },
+
+  videoPlayerBg: {
+    position: 'absolute',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    filter: 'blur(5px)',
+    opacity: .5,
+    zIndex: 0,
+  }
+}
+
 const textTag = [
   'a', 'p', 'b', 'span', 'strong', 'em',
 ]
@@ -52,7 +83,7 @@ function rule(node, children) {
     return <p {...attributes} style={{color: "#444"}}>{children}</p>
   } else if (name === 'button') {
     return (
-      <button style={{padding: '10px 20px', border: 0, backgroundColor: '#0f88eb', color: '#fff'}}>
+      <button style={styles.convertButton}>
         {children}
       </button>
     )
@@ -66,9 +97,6 @@ function rule(node, children) {
           {...attributes}
           key={index}
           alt='img'
-          width={100}
-          height={100}
-          style={{width: 100, height: 100, display: 'inline-block'}}
         />
       )
     }
@@ -76,7 +104,12 @@ function rule(node, children) {
     // replace br with hr
     return <hr className='customized-hr' />
   } else if (name === 'video') {
-    return <VideoPlayer className='vide-player' url={attributes.src} playing loop />
+    return (
+      <div style={styles.videoPlayerWrap}>
+        <div style={Object.assign({}, styles.videoPlayerBg, {backgroundImage: `url(${attributes.poster})`})} />
+        <VideoPlayer style={styles.videoPlayer} url={attributes.src} playing={false} loop controls />
+      </div>
+    )
   } else {
     const Tag = name
     return <Tag {...attributes}>{children}</Tag>

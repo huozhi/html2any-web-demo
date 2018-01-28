@@ -4,8 +4,9 @@
   "private": true,
   "homepage": "https://huozhi.github.io/html2any-web-demo",
   "dependencies": {
+    "codemirror": "^5.33.0",
     "he": "^1.1.1",
-    "html2any": "0.0.4",
+    "html2any": "0.0.5",
     "react": "^15.6.1",
     "react-codemirror": "^1.0.0",
     "react-dom": "^15.6.1",

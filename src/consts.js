@@ -10,13 +10,14 @@ export const defaultHTML = `
     <img style="float: left;" src="https://html-online.com/img/03-docs-to-html.png" alt="Word to html" width="45" />
     <img style="float: left;" src="https://html-online.com/img/04-replace.png" alt="replace text" width="45" />
   </div>
-  <img src="//media.giphy.com/media/b9aScKLxdv0Y0/giphy.gif" width="320" height="240">
+  <img src="https://media.giphy.com/media/b9aScKLxdv0Y0/giphy.gif" width="480" height="auto">
 
   <p>if you see only&nbsp;<strong>poster</strong>&nbsp;here, it means the video is still loading</p>
   <video
     style="width: 100%; height: 100%; display: block;"
     preload="auto"
     loop
+    controls
     src="http://vjs.zencdn.net/v/oceans.mp4"
     poster="http://vjs.zencdn.net/v/oceans.png"
   ></video>
